@@ -20,6 +20,11 @@ public class EstudianteServiceImpl implements EstudianteService{
 	}
 
 	@Override
+	public Estudiante findByid(String id) {
+		return estudianteRepository.findById(id).orElse(null);
+	}
+
+	@Override
 	public Estudiante findByNumero(Long number) {
 		// TODO Auto-generated method stub
 		return estudianteRepository.findByNumero(number);

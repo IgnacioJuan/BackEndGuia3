@@ -5,18 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ista.guachi.app.model.Estudiante;
 import com.ista.guachi.app.service.EstudianteService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/estudiate")
 public class EstudianteController {
 	
@@ -60,5 +55,18 @@ public class EstudianteController {
 		// TODO Auto-generated method stub
 		estudianteService.deleteEstudiante(id);
 	}
-	
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> actualizarEstudiante(@PathVariable(value = "id") String id,
+														   @RequestBody Estudiante estudianteDetalle) {
+		Estudiante estudiante = estudianteService.findByid(id);
+
+		estudiante.setNombre(estudianteDetalle.getNombre());
+		estudiante.setNumero(estudianteDetalle.getNumero());
+		estudiante.setCorreo(estudianteDetalle.getCorreo());
+		estudiante.setListCursos(estudianteDetalle.getListCursos());
+		estudiante.setGpa(estudianteDetalle.getGpa());
+		estudianteService.saveOrUpdateEstudiante(estudiante);
+		return new ResponseEntity<>("Estudiante modificado con exito",HttpStatus.OK);
+	}
 }

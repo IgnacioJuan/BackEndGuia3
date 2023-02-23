@@ -6,6 +6,7 @@ import com.ista.guachi.app.model.Estudiante;
 
 public interface EstudianteService {
 	List<Estudiante> findAll();
+	Estudiante findByid(String id);
 	Estudiante findByNumero(Long number);
 	Estudiante findByCorreo(String correo);
 	List<Estudiante> findAllByOrderByGpa();

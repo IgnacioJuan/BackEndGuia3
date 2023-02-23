@@ -13,8 +13,8 @@ public class Estudiante {
     @Id
     private String id;
     private String nombre;
-    private Long numero;
+    private int numero;
     private String correo;
-    private List<String>  listCursos;
-    private float gpa;
+    private String  listCursos;
+    private int gpa;
 }
